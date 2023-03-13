@@ -1,7 +1,7 @@
 import express from 'express';
 import 'express-async-errors';
 import cookieSession from 'cookie-session';
-import { errorHandler, NotFoundError } from '@asi309tickets/common';
+import { errorHandler, NotFoundError } from '@asi309kanban/common';
 
 import { currentUserRouter } from './routes/currentUser';
 import { signinRouter } from './routes/signin';

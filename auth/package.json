@@ -28,7 +28,7 @@
     "ts-jest": "^27.0.5"
   },
   "dependencies": {
-    "@asi309tickets/common": "^1.0.3",
+    "@asi309kanban/common": "^1.0.1",
     "@types/cookie-session": "^2.0.43",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.5",
