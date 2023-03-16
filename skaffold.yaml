@@ -16,3 +16,11 @@ build:
         manual:
           - dest: .
             src: 'src/**/*.ts'
+    - image: asi309/boards
+      context: boards
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: 'src/**/*.ts'
