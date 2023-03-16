@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: boards-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: boards
+  template:
+    metadata:
+      labels:
+        app: boards
+    spec:
+      containers:
+        - name: boards
+          image: asi309/boards
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://boards-mongodb-srv:27017/boards'
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+          resources:
+            limits:
+              memory: '256Mi'
+              cpu: '500m'
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: boards-srv
+spec:
+  selector:
+    app: boards
+  ports:
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP
+      name: boards
