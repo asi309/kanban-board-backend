@@ -2,28 +2,31 @@ import mongoose from 'mongoose';
 
 interface BoardAttrs {
   name: string;
-  password: string;
+  userId: string;
+  tasks: [];
 }
 
-interface UserModel extends mongoose.Model<UserDoc> {
-  build(attrs: BoardAttrs): UserDoc;
+interface BoardModel extends mongoose.Model<BoardDoc> {
+  build(attrs: BoardAttrs): BoardDoc;
 }
 
-interface UserDoc extends mongoose.Document {
-  email: string;
-  password: string;
+interface BoardDoc extends mongoose.Document {
+  name: string;
+  userId: string;
+  tasks: [];
 }
 
-const UserSchema = new mongoose.Schema(
+const BoardSchema = new mongoose.Schema(
   {
-    email: {
+    name: {
       type: String,
       required: true,
     },
-    password: {
-      type: String,
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
+    tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'task' }],
   },
   {
     toJSON: {
@@ -37,8 +40,8 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-UserSchema.statics.build = (attrs: BoardAttrs) => {
-  return new User(attrs);
+BoardSchema.statics.build = (attrs: BoardAttrs) => {
+  return new Board(attrs);
 };
 
 // UserSchema.pre('save', async function (done) {
@@ -49,4 +52,4 @@ UserSchema.statics.build = (attrs: BoardAttrs) => {
 //   done();
 // });
 
-export const User = mongoose.model<UserDoc, UserModel>('User', UserSchema);
+export const Board = mongoose.model<BoardDoc, BoardModel>('board', BoardSchema);
