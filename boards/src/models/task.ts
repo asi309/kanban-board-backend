@@ -1,22 +1,22 @@
 import mongoose from 'mongoose';
 
-interface BoardAttrs {
+interface TaskAttrs {
   name: string;
   userId: string;
   tasks: [];
 }
 
-interface BoardModel extends mongoose.Model<BoardDoc> {
-  build(attrs: BoardAttrs): BoardDoc;
+interface TaskModel extends mongoose.Model<TaskDoc> {
+  build(attrs: TaskAttrs): TaskDoc;
 }
 
-interface BoardDoc extends mongoose.Document {
+interface TaskDoc extends mongoose.Document {
   name: string;
   userId: string;
   tasks: [];
 }
 
-const BoardSchema = new mongoose.Schema(
+const TaskSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -40,8 +40,8 @@ const BoardSchema = new mongoose.Schema(
   }
 );
 
-BoardSchema.statics.build = (attrs: BoardAttrs) => {
+TaskSchema.statics.build = (attrs: TaskAttrs) => {
   return new Board(attrs);
 };
 
-export const Board = mongoose.model<BoardDoc, BoardModel>('board', BoardSchema);
+export const Board = mongoose.model<TaskDoc, TaskModel>('task', TaskSchema);
