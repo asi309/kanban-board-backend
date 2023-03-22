@@ -8,6 +8,13 @@
     "start": "ts-node src/index.ts",
     "dev": "ts-node-dev src/index.ts"
   },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./src/test/setup.ts"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

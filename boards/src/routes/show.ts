@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import {
   NotAuthorizedError,
   NotFoundError,
@@ -12,15 +12,16 @@ const router = express.Router();
 router.get(
   '/api/boards/:id',
   requireAuth,
-  async (req: Request, res: Response) => {
-    const board = await Board.findById(req.params.id).populate('tasks');
+  async (req: Request, res: Response, next: NextFunction) => {
+    const board = await Board.findById(req.params.id);
+    // .populate('tasks');
 
     if (!board) {
-      return new NotFoundError();
+      return next(new NotFoundError());
     }
 
     if (board.userId !== req.currentUser!.id) {
-      return new NotAuthorizedError();
+      return next(new NotAuthorizedError());
     }
 
     return res.send(board);

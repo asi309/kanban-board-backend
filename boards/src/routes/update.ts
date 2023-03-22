@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { body } from 'express-validator';
 import {
   NotAuthorizedError,
@@ -22,16 +22,16 @@ router.put(
       .withMessage('Please enter a name for the board'),
   ],
   validateRequest,
-  async (req: Request, res: Response) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     const board = await Board.findById(req.params.id);
 
     if (!board) {
-      console.log('Here')
-      throw new NotFoundError();
+      next(new NotFoundError());
+      return;
     }
 
     if (board.userId !== req.currentUser!.id) {
-      throw new NotAuthorizedError();
+      next(new NotAuthorizedError());
     }
 
     board.set('name', req.body.name);

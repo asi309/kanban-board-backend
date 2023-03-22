@@ -10,7 +10,7 @@ import { Board } from '../models/board';
 const router = express.Router();
 
 router.post(
-  '/api/boards/create',
+  '/api/boards',
   requireAuth,
   [
     body('name')
