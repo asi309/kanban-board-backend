@@ -24,3 +24,11 @@ build:
         manual:
           - dest: .
             src: 'src/**/*.ts'
+    - image: asi309/columns
+      context: columns
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: 'src/**/*.ts'

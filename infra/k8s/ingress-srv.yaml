@@ -25,10 +25,10 @@ spec:
                 port:
                   number: 3000
           - pathType: Prefix
-            path: /api/orders/.*
+            path: /api/columns/?.*
             backend:
               service:
-                name: orders-srv
+                name: columns-srv
                 port:
                   number: 3000
           - pathType: Prefix
