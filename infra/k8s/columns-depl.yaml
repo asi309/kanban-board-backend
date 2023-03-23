@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: columns-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: columns
+  template:
+    metadata:
+      labels:
+        app: columns
+    spec:
+      containers:
+        - name: columns
+          image: asi309/columns
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://columns-mongodb-srv:27017/columns'
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+          resources:
+            limits:
+              memory: '256Mi'
+              cpu: '500m'
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: columns-srv
+spec:
+  selector:
+    app: columns
+  ports:
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP
+      name: columns
