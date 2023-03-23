@@ -14,7 +14,6 @@ router.get(
   requireAuth,
   async (req: Request, res: Response, next: NextFunction) => {
     const board = await Board.findById(req.params.id);
-    // .populate('tasks');
 
     if (!board) {
       return next(new NotFoundError());

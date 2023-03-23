@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
 
 interface TaskAttrs {
-  name: string;
+  title: string;
+  description: string;
   userId: string;
-  tasks: [];
+  boardId: string;
+  parent: string;
 }
 
 interface TaskModel extends mongoose.Model<TaskDoc> {
@@ -11,22 +13,29 @@ interface TaskModel extends mongoose.Model<TaskDoc> {
 }
 
 interface TaskDoc extends mongoose.Document {
-  name: string;
+  title: string;
+  description: string;
   userId: string;
-  tasks: [];
+  boardId: string;
+  parent: string;
 }
 
 const TaskSchema = new mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true,
     },
+    description: String,
     userId: {
       type: String,
       required: true,
     },
-    tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'task' }],
+    boardId: {
+      type: String,
+      required: true,
+    },
+    parent: { type: mongoose.Schema.Types.ObjectId, ref: 'task' },
   },
   {
     toJSON: {
@@ -41,7 +50,7 @@ const TaskSchema = new mongoose.Schema(
 );
 
 TaskSchema.statics.build = (attrs: TaskAttrs) => {
-  return new Board(attrs);
+  return new Task(attrs);
 };
 
-export const Board = mongoose.model<TaskDoc, TaskModel>('task', TaskSchema);
+export const Task = mongoose.model<TaskDoc, TaskModel>('task', TaskSchema);

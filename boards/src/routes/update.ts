@@ -32,6 +32,7 @@ router.put(
 
     if (board.userId !== req.currentUser!.id) {
       next(new NotAuthorizedError());
+      return;
     }
 
     board.set('name', req.body.name);

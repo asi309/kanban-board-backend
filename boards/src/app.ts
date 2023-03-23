@@ -7,6 +7,7 @@ import { createBoardRouter } from './routes/new';
 import { indexBoardRouter } from './routes';
 import { updateBoardRouter } from './routes/update';
 import { showBoardRouter } from './routes/show';
+import { deleteBoardRouter } from './routes/delete';
 
 export const app = express();
 app.set('trust proxy', true);
@@ -23,6 +24,7 @@ app.use(createBoardRouter);
 app.use(indexBoardRouter);
 app.use(showBoardRouter);
 app.use(updateBoardRouter);
+app.use(deleteBoardRouter);
 
 app.all('*', () => {
   throw new NotFoundError();

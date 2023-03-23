@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 interface BoardAttrs {
   name: string;
   userId: string;
-  tasks: [];
+  // tasks: [];
 }
 
 interface BoardModel extends mongoose.Model<BoardDoc> {
@@ -13,7 +13,7 @@ interface BoardModel extends mongoose.Model<BoardDoc> {
 interface BoardDoc extends mongoose.Document {
   name: string;
   userId: string;
-  tasks: [];
+  // tasks: [];
 }
 
 const BoardSchema = new mongoose.Schema(
@@ -26,7 +26,7 @@ const BoardSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'task' }],
+    // tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'task' }],
   },
   {
     toJSON: {

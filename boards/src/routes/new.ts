@@ -34,7 +34,7 @@ router.post(
       return;
     }
 
-    const board = Board.build({ name, userId: req.currentUser!.id, tasks: [] });
+    const board = Board.build({ name, userId: req.currentUser!.id });
     await board.save();
 
     return res.status(201).send(board);
