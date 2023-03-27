@@ -3,6 +3,8 @@ import 'express-async-errors';
 import cookieSession from 'cookie-session';
 import { currentUser, errorHandler, NotFoundError } from '@asi309kanban/common';
 
+import { createColumnRouter } from './routes/create';
+
 export const app = express();
 app.set('trust proxy', true);
 app.use(express.json());
@@ -20,6 +22,7 @@ app.get('/api/columns', (req, res) => {
 });
 
 app.use(currentUser);
+app.use(createColumnRouter);
 
 app.all('*', () => {
   throw new NotFoundError();
