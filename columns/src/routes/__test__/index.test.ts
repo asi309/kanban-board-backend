@@ -4,14 +4,14 @@ import { app } from '../../app';
 
 it('should show all the columns created by user', async () => {
   const cookie = global.signin();
-  const boardid = 'sjhkdh';
+  const boardId = 'sjhkdh';
 
   const column1 = await request(app)
     .post('/api/columns')
     .set('Cookie', cookie)
     .send({
       name: 'test',
-      boardid,
+      boardId,
     })
     .expect(201);
 

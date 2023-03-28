@@ -10,7 +10,7 @@ it('should delete a column owned by user', async () => {
     .set('Cookie', cookie)
     .send({
       name: 'test',
-      boardid: 'qwerty',
+      boardId: 'qwerty',
     })
     .expect(201);
 
@@ -27,7 +27,7 @@ it('should not delete a column not owned by user', async () => {
     .set('Cookie', global.signin())
     .send({
       name: 'test',
-      boardid: 'qwerty',
+      boardId: 'qwerty',
     })
     .expect(201);
 
@@ -44,7 +44,7 @@ it('should not allow unauthorized access', async () => {
     .set('Cookie', global.signin())
     .send({
       name: 'test',
-      boardid: 'qwerty',
+      boardId: 'qwerty',
     })
     .expect(201);
 

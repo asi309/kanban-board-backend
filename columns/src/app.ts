@@ -4,6 +4,7 @@ import cookieSession from 'cookie-session';
 import { currentUser, errorHandler, NotFoundError } from '@asi309kanban/common';
 
 import { createColumnRouter } from './routes/create';
+import { indexColumnrouter } from './routes';
 
 export const app = express();
 app.set('trust proxy', true);
@@ -15,14 +16,9 @@ app.use(
   })
 );
 
-app.get('/api/columns', (req, res) => {
-  return res.json({
-    status: 'Columns api OK',
-  });
-});
-
 app.use(currentUser);
 app.use(createColumnRouter);
+app.use(indexColumnrouter);
 
 app.all('*', () => {
   throw new NotFoundError();

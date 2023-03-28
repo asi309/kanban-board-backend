@@ -10,7 +10,7 @@ it('should update the column with column id if user created it', async () => {
     .set('Cookie', cookie)
     .send({
       name: 'test',
-      boardid: 'qerjwebg',
+      boardId: 'qerjwebg',
     })
     .expect(201);
 
@@ -19,7 +19,7 @@ it('should update the column with column id if user created it', async () => {
     .set('Cookie', cookie)
     .send({
       name: 'test123',
-      boardid: 'qerjwebg',
+      boardId: 'qerjwebg',
     })
     .expect(200);
 
@@ -32,7 +32,7 @@ it('should not update the column with column id if user did not create it', asyn
     .set('Cookie', global.signin())
     .send({
       name: 'test',
-      boardid: 'qerjwebg',
+      boardId: 'qerjwebg',
     })
     .expect(201);
 
@@ -41,7 +41,7 @@ it('should not update the column with column id if user did not create it', asyn
     .set('Cookie', global.signin())
     .send({
       name: 'tstg21qt',
-      boardid: 'qerjwebg',
+      boardId: 'qerjwebg',
     })
     .expect(401);
 });
@@ -52,7 +52,7 @@ it('should prevent unauthorized access', async () => {
     .set('Cookie', global.signin())
     .send({
       name: 'test',
-      boardid: 'qerjwebg',
+      boardId: 'qerjwebg',
     })
     .expect(201);
 
@@ -60,7 +60,7 @@ it('should prevent unauthorized access', async () => {
     .put(`/api/columns/${col1.body.id}`)
     .send({
       name: 'tstg21qt',
-      boardid: 'qerjwebg',
+      boardId: 'qerjwebg',
     })
     .expect(401);
 });
