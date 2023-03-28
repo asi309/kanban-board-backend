@@ -7,6 +7,7 @@ import { createColumnRouter } from './routes/create';
 import { indexColumnrouter } from './routes';
 import { showColumnRouter } from './routes/show';
 import { updateColumnRouter } from './routes/update';
+import { deleteColumnRouter } from './routes/delete';
 
 export const app = express();
 app.set('trust proxy', true);
@@ -23,6 +24,7 @@ app.use(createColumnRouter);
 app.use(indexColumnrouter);
 app.use(showColumnRouter);
 app.use(updateColumnRouter);
+app.use(deleteColumnRouter);
 
 app.all('*', () => {
   throw new NotFoundError();
