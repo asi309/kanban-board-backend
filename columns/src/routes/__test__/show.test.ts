@@ -15,8 +15,17 @@ it('should show the columns created by user under a board', async () => {
     })
     .expect(201);
 
+  const column2 = await request(app)
+    .post('/api/columns')
+    .set('Cookie', cookie)
+    .send({
+      name: 'test',
+      boardId: 'qwerty',
+    })
+    .expect(201);
+
   const response = await request(app)
-    .get(`/api/columns?boardid=${boardId}`)
+    .get(`/api/columns/by-board/${boardId}`)
     .set('Cookie', cookie)
     .send()
     .expect(200);
@@ -37,11 +46,13 @@ it('should not show the columns created by any other user', async () => {
     })
     .expect(201);
 
-  await request(app)
-    .get(`/api/columns?boardid=${boardId}`)
+  const response = await request(app)
+    .get(`/api/columns/by-board/${boardId}`)
     .set('Cookie', global.signin())
     .send()
-    .expect(401);
+    .expect(200);
+
+  expect(response.body).toHaveLength(0);
 });
 
 it('should prevent unauthorized access', async () => {

@@ -5,6 +5,7 @@ import { currentUser, errorHandler, NotFoundError } from '@asi309kanban/common';
 
 import { createColumnRouter } from './routes/create';
 import { indexColumnrouter } from './routes';
+import { showColumnRouter } from './routes/show';
 
 export const app = express();
 app.set('trust proxy', true);
@@ -19,6 +20,7 @@ app.use(
 app.use(currentUser);
 app.use(createColumnRouter);
 app.use(indexColumnrouter);
+app.use(showColumnRouter);
 
 app.all('*', () => {
   throw new NotFoundError();
