@@ -32,6 +32,13 @@ spec:
                 port:
                   number: 3000
           - pathType: Prefix
+            path: /api/tasks/?.*
+            backend:
+              service:
+                name: tasks-srv
+                port:
+                  number: 3000
+          - pathType: Prefix
             path: /.*
             backend:
               service:

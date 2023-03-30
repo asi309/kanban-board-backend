@@ -4,8 +4,8 @@ interface TaskAttrs {
   title: string;
   description: string;
   userId: string;
-  boardId: string;
-  parent: string;
+  columnId?: string;
+  parent?: string;
 }
 
 interface TaskModel extends mongoose.Model<TaskDoc> {
@@ -16,8 +16,8 @@ interface TaskDoc extends mongoose.Document {
   title: string;
   description: string;
   userId: string;
-  boardId: string;
-  parent: string;
+  columnId?: string;
+  parent?: string;
 }
 
 const TaskSchema = new mongoose.Schema(
@@ -31,10 +31,7 @@ const TaskSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    boardId: {
-      type: String,
-      required: true,
-    },
+    columnId: String,
     parent: { type: mongoose.Schema.Types.ObjectId, ref: 'task' },
   },
   {

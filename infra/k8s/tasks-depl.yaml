@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasks-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tasks
+  template:
+    metadata:
+      labels:
+        app: tasks
+    spec:
+      containers:
+        - name: tasks
+          image: asi309/tasks
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://tasks-mongodb-srv:27017/tasks'
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+          resources:
+            limits:
+              memory: '256Mi'
+              cpu: '500m'
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tasks-srv
+spec:
+  selector:
+    app: tasks
+  ports:
+    - port: 3000
+      targetPort: 3000
+      protocol: TCP
+      name: tasks
