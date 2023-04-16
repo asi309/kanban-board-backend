@@ -28,6 +28,15 @@ router.post(
     const columnId = req.body?.columnId;
     const parent = req.body?.parent;
 
+    // Check if one of columnId and parent is valid
+    if (!columnId && !parent) {
+      next(
+        new BadRequestError(
+          'Task can be created under a column or another task'
+        )
+      );
+    }
+
     // check if task already exists
     const existingTask = await Task.findOne({
       title,
