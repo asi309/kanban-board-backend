@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 interface TaskAttrs {
   title: string;
-  description: string;
+  description?: string;
   userId: string;
   columnId?: string;
   parent?: string;
@@ -14,7 +14,7 @@ interface TaskModel extends mongoose.Model<TaskDoc> {
 
 interface TaskDoc extends mongoose.Document {
   title: string;
-  description: string;
+  description?: string;
   userId: string;
   columnId?: string;
   parent?: string;
