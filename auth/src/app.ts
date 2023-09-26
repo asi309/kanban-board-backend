@@ -1,6 +1,5 @@
 import express from 'express';
 import 'express-async-errors';
-import cors from 'cors';
 import cookieSession from 'cookie-session';
 import { errorHandler, NotFoundError } from '@asi309kanban/common';
 
@@ -12,7 +11,6 @@ import { signupRouter } from './routes/signup';
 export const app = express();
 app.set('trust proxy', true);
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:3000' }))
 app.use(
   cookieSession({
     signed: false,
