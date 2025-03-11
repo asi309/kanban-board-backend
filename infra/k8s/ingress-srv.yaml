@@ -10,35 +10,35 @@ spec:
     - host: kanban.com
       http:
         paths:
-          - pathType: Prefix
-            path: /api/users/?.*
+          - pathType: ImplementationSpecific
+            path: /api/users/.*
             backend:
               service:
                 name: auth-srv
                 port:
                   number: 3000
-          - pathType: Prefix
-            path: /api/boards/?.*
+          - pathType: ImplementationSpecific
+            path: /api/boards/.*
             backend:
               service:
                 name: boards-srv
                 port:
                   number: 3000
-          - pathType: Prefix
-            path: /api/columns/?.*
+          - pathType: ImplementationSpecific
+            path: /api/columns/.*
             backend:
               service:
                 name: columns-srv
                 port:
                   number: 3000
-          - pathType: Prefix
-            path: /api/tasks/?.*
+          - pathType: ImplementationSpecific
+            path: /api/tasks/.*
             backend:
               service:
                 name: tasks-srv
                 port:
                   number: 3000
-          - pathType: Prefix
+          - pathType: ImplementationSpecific
             path: /.*
             backend:
               service:
